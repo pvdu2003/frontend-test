@@ -16,6 +16,11 @@
   gap: 2rem;
   margin-top: 2rem;
 }
+.testimonials {
+  padding: 30px 40px;
+  background-color: #f5f5ff;
+  border-radius: 20px;
+}
 @media (max-width: 1024px) {
   .hero {
     flex-direction: column;

@@ -1,0 +1,91 @@
+.sliderWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.sliderContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+}
+
+.mainCard {
+  z-index: 2;
+}
+
+.sideCard {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.cardContainer {
+  width: 200%;
+  position: relative;
+}
+
+.sideCard.prev {
+  left: 0;
+}
+
+.sideCard.next {
+  right: 0;
+}
+
+.sideCard.prev .cardContainer {
+  left: -100%;
+}
+
+.sideCard.next .cardContainer {
+  right: 0;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #333;
+}
+
+.arrowLeft,
+.arrowRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  z-index: 3;
+  padding: 5px;
+}
+
+.arrowLeft {
+  left: 5px;
+}
+
+.arrowRight {
+  right: 5px;
+}

@@ -1,5 +1,7 @@
 import Button from "../../shared/components/Button/Button";
 import FeatureItem from "../../shared/components/Feature/FeatureItem";
+import Slider from "../../shared/components/Slider/Slider";
+import TestimonialCard from "../../shared/components/Testimonial/TestimonialCard";
 import styles from "./Home.module.css";
 function Home() {
   const features = [
@@ -22,6 +24,33 @@ function Home() {
       title: "Security Code",
       description: "Top-tier encryption ensures your data is safe.",
       icon: "./images/feature4.png",
+    },
+  ];
+
+  const testimonials = [
+    {
+      name: "John Fang1",
+      image: "./images/avatar1.jpg",
+      company: "wordfaang.com",
+      text: "Suspendisse ultrices at diam lectus nullam.1 ",
+    },
+    {
+      name: "Jane Doe2",
+      image: "./images/avatar1.jpg",
+      company: "janedoe.io",
+      text: "Suspendisse ultrices at diam lectus nullam.2 Nisl, sagittis viverra enim erat tortor2 ultricies massa turpis. Arcu pulvinar aenean nam laoreet nulla.",
+    },
+    {
+      name: "John Fang3",
+      image: "./images/avatar1.jpg",
+      company: "wordfaang.com",
+      text: "Nisl, sagittis viverra enim erat tortor ultricies massa3 turpis. Arcu pulvinar aenean3 nam laoreet nulla.",
+    },
+    {
+      name: "Jane Doe4",
+      image: "./images/avatar1.jpg",
+      company: "janedoe.io",
+      text: "Nisl, Suspendisse ultrices at diam lectus nullam. 4Nisl, sagittis viverra enim erat4 tortor ultricies massa turpis. Arcu pulvinar aenean nam laoreet nulla.",
     },
   ];
   return (
@@ -51,6 +80,20 @@ function Home() {
             </div>
           ))}
         </div>
+      </section>
+      <section className={styles.testimonials}>
+        <h2>Testimonials</h2>
+        <Slider>
+          {testimonials.map((t, idx) => (
+            <TestimonialCard
+              key={idx}
+              name={t.name}
+              image={t.image}
+              company={t.company}
+              text={t.text}
+            />
+          ))}
+        </Slider>
       </section>
     </>
   );
