@@ -1,0 +1,107 @@
+.footer {
+  background-color: #fff;
+  padding: 3rem 2rem;
+  font-size: 0.9rem;
+  color: #2d2d2d;
+}
+
+.topSection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.column {
+  min-width: 180px;
+  flex: 1;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.logoImage {
+  margin-right: 1.5rem;
+}
+
+.column h4 {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #121212;
+}
+
+.column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.column ul li {
+  margin-bottom: 0.5rem;
+  color: #555;
+  cursor: pointer;
+}
+
+.column ul li:hover {
+  text-decoration: underline;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.socialCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.socialCircle img {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.socialCircle:hover {
+  background-color: #a259ff;
+}
+
+.socialCircle:hover img {
+  transform: scale(1.2);
+}
+
+.bottomSection {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #888;
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .topSection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .column {
+    width: 100%;
+  }
+
+  .bottomSection {
+    text-align: left;
+  }
+}

@@ -1,0 +1,41 @@
+.button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+/* Kiểu PRIMARY */
+.primary {
+  background-color: transparent;
+  color: black;
+}
+
+.primary:hover {
+  color: #a259ff;
+}
+
+/* Kiểu SECONDARY */
+.secondary {
+  background-color: #f5f5ff;
+  color: #333;
+}
+
+.secondary:hover {
+  color: #333;
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease-in-out;
+}

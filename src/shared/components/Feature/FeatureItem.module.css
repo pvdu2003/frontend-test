@@ -1,0 +1,13 @@
+.card {
+  background-color: #f5f5ff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  text-align: left;
+}
+
+.featureImage {
+  max-width: 300px;
+  max-height: 150px;
+  height: auto;
+  border-radius: 0.5rem;
+}
