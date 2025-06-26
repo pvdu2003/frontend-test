@@ -1,0 +1,17 @@
+.sidebar {
+  width: 160px;
+  background-color: #eee;
+  height: 100vh;
+  padding: 16px;
+}
+.logo {
+  margin-bottom: 16px;
+}
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  margin-bottom: 12px;
+  cursor: pointer;
+}
