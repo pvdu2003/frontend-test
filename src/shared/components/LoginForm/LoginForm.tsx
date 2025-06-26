@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { login } from "../../../services/auth.service";
+import { loginHandler } from "../../../services/auth.service";
 import Button from "../Button/Button";
 import styles from "./LoginForm.module.css";
+import { useAuth } from "../../../contexts/AuthContext";
 
 interface Props {
   onClose: () => void;
@@ -11,10 +12,18 @@ const LoginForm: React.FC<Props> = ({ onClose }) => {
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
+  const { login } = useAuth();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
-      await login(username);
+      const response = await loginHandler(username);
+
+      if (response?.code === 401) {
+        setError("Invalid username");
+        return;
+      }
+      login(response.accessToken, response.refreshToken);
       onClose();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
@@ -23,7 +32,7 @@ const LoginForm: React.FC<Props> = ({ onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Username"
@@ -33,7 +42,7 @@ const LoginForm: React.FC<Props> = ({ onClose }) => {
         className={styles.input}
       />
       {error && <p className={styles.error}>{error}</p>}
-      <Button text="Login" onClick={handleSubmit} />
+      <Button text="Login" />
     </form>
   );
 };

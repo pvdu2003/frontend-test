@@ -1,12 +1,16 @@
-import axios from "axios";
+import api from "../axios/axiosInstance";
 
-const API_URL = import.meta.env.VITE_SERVER_URL;
+export const loginHandler = async (username: string) => {
+  try {
+    const response = await api.post("/auth/login", { username });
 
-export const login = async (username: string) => {
-  const response = await axios.post(`${API_URL}/auth/login`, { username });
-  return response.data;
+    return response.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    throw error.response?.data || { message: "Server error" };
+  }
 };
 export const logout = async () => {
-  const response = await axios.post(`${API_URL}/auth/logout`);
+  const response = await api.post("/auth/logout");
   return response.data;
 };

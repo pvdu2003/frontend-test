@@ -4,7 +4,11 @@
   align-items: center;
   padding: 1rem 3rem;
 }
-
+.userActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 .logo {
   font-size: 1.5rem;
 }
