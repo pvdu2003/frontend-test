@@ -16,11 +16,12 @@
 
 .mainCard {
   z-index: 2;
+  transform: scale(1.1);
 }
 
 .sideCard {
   position: absolute;
-  width: 100%;
+  width: 50%;
   overflow: hidden;
   z-index: 1;
   cursor: pointer;
