@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import MainLayout from "./shared/layouts/MainLayout/MainLayout";
-import AuthLayout from "./shared/layouts/AuthLayout/AuthLayout";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -9,7 +9,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainLayout children={<Home />} />} />
-          <Route path="/login" element={<AuthLayout children={<Home />} />} />
+          <Route
+            path="/profile"
+            element={<MainLayout children={<Profile />} />}
+          />
         </Routes>
       </BrowserRouter>
     </>

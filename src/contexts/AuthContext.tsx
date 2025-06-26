@@ -1,8 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { setLogoutHandler } from "../utils/authHelper";
+import { logoutAPI } from "../services/auth.service";
 
 interface AuthContextType {
   isLoggedIn: boolean;
   login: (accessToken: string, refreshToken: string) => void;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -23,8 +26,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setIsLoggedIn(true);
   };
 
+  const logout = async () => {
+    try {
+      await logoutAPI();
+    } catch (err) {
+      console.warn("Logout API failed (continuing):", err);
+    }
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    setIsLoggedIn(false);
+  };
+
+  useEffect(() => {
+    setLogoutHandler(logout);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

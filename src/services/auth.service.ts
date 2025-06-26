@@ -10,7 +10,7 @@ export const loginHandler = async (username: string) => {
     throw error.response?.data || { message: "Server error" };
   }
 };
-export const logout = async () => {
-  const response = await api.post("/auth/logout");
+export const logoutAPI = async () => {
+  const response = await api.delete("/auth/logout");
   return response.data;
 };

@@ -4,21 +4,27 @@ import Button from "../Button/Button";
 import Popup from "../Popup/Popup";
 import LoginForm from "../LoginForm/LoginForm";
 import { useAuth } from "../../../contexts/AuthContext";
-import { logout } from "../../../services/auth.service";
+import { useNavigate } from "react-router-dom";
 
 const Header: React.FC = () => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-
+  const navigate = useNavigate();
+  const navigateToProfile = () => {
+    navigate("/profile");
+  };
+  const handleLogout = async () => {
+    await logout();
+  };
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>
+      <div className={styles.logo} onClick={() => navigate("/")}>
         <img src="./images/logo.png" alt="Logo" />
       </div>
       {isLoggedIn ? (
         <div className={styles.userActions}>
-          <Button text="Profile" />
-          <Button text="Logout" onClick={logout} />
+          <Button text="Profile" onClick={navigateToProfile} />
+          <Button text="Logout" onClick={handleLogout} />
         </div>
       ) : (
         <>
