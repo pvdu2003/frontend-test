@@ -1,18 +1,19 @@
-import React from "react";
 import styles from "./Table.module.css";
 
 export interface Column<T> {
   key: keyof T | string;
   header: string;
   render?: (row: T) => React.ReactNode;
+  onEdit?: (row: T) => void;
+  onDelete?: (row: T) => void;
 }
 
-interface TableProps<T> {
+interface TableProps<T extends object> {
   columns: Column<T>[];
   data: T[];
 }
 
-function Table<T>({ columns, data }: TableProps<T>) {
+function Table<T extends object>({ columns, data }: TableProps<T>) {
   return (
     <table className={styles.table}>
       <thead>
@@ -34,11 +35,34 @@ function Table<T>({ columns, data }: TableProps<T>) {
           <tr key={rowIdx}>
             {columns.map((col, colIdx) => (
               <td key={colIdx}>
-                {col.render
-                  ? col.render(row)
-                  : typeof col.key === "string"
-                  ? String((row as T)[col.key as keyof T])
-                  : ""}
+                {col.key === "actions" ? (
+                  <div className={styles.actions}>
+                    {col.onEdit && (
+                      <img
+                        src="./images/edit.png"
+                        alt="Edit"
+                        className={styles.actionIcon}
+                        title="Edit"
+                        onClick={() => col.onEdit?.(row)}
+                      />
+                    )}
+                    {col.onDelete && (
+                      <img
+                        src="./images/delete.png"
+                        alt="Delete"
+                        className={styles.actionIcon}
+                        title="Delete"
+                        onClick={() => col.onDelete?.(row)}
+                      />
+                    )}
+                  </div>
+                ) : col.render ? (
+                  col.render(row)
+                ) : typeof col.key === "string" ? (
+                  String(row[col.key as keyof T])
+                ) : (
+                  ""
+                )}
               </td>
             ))}
           </tr>

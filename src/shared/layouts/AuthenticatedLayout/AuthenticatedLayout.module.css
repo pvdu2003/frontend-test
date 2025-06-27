@@ -1,6 +1,30 @@
 .authenticated-layout {
   display: flex;
-  flex-direction: row;
   min-height: 100vh;
-  gap: 32px;
+  width: 100%;
+  background-color: #f9f9f9;
+}
+
+.authenticated-layout > :first-child {
+  width: 240px;
+  background-color: #fff;
+  border-right: 1px solid #e0e0e0;
+}
+
+.authenticated-layout > :last-child {
+  flex: 1;
+  padding: 24px;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .authenticated-layout > :first-child {
+    width: 80px;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .authenticated-layout > :last-child {
+    padding: 8px;
+  }
 }

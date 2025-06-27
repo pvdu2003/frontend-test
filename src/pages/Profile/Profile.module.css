@@ -1,0 +1,47 @@
+.profile {
+  padding: 24px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tag {
+  background-color: #eef;
+  color: #336;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .profile {
+    padding: 16px;
+  }
+
+  h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+
+  .tagList {
+    justify-content: flex-start;
+    gap: 6px;
+  }
+}

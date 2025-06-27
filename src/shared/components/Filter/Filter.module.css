@@ -1,7 +1,7 @@
 .filters {
   display: flex;
   gap: 12px;
-  margin-left: auto;
+  margin: 1rem 0;
 }
 input,
 select {

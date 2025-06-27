@@ -4,6 +4,7 @@ import type { Column } from "../../shared/components/Table/Table";
 import Table from "../../shared/components/Table/Table";
 import { getAllPost, getAllTags } from "../../services/profile.service";
 import Filter from "../../shared/components/Filter/Filter";
+import Pagination from "../../shared/components/Pagination/Pagination";
 
 interface Post {
   id: string;
@@ -17,6 +18,8 @@ const Profile: React.FC = () => {
   const [tags, setTags] = useState<string[]>([]);
   const [selectedTag, setSelectedTag] = useState("");
   const [title, setTitle] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const fetchTags = async () => {
     try {
@@ -30,15 +33,20 @@ const Profile: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await getAllPost("1", title, selectedTag);
+        const response = await getAllPost(
+          currentPage.toString(),
+          title,
+          selectedTag
+        );
         setPosts(response.posts);
+        setTotalPages(response.total_page);
       } catch (err) {
         console.error("Error fetching posts:", err);
       }
     };
 
     fetchPosts();
-  }, [selectedTag, title]);
+  }, [selectedTag, title, currentPage]);
 
   const columns: Column<Post>[] = [
     { key: "title", header: "Title" },
@@ -48,14 +56,20 @@ const Profile: React.FC = () => {
       header: "Tags",
       render: (row) => (
         <div className={styles.tagList}>
-          {row.tags.map((tag, index) => (
+          {(row.tags || []).map((tag, index, arr) => (
             <span key={index} className={styles.tag}>
               {tag}
-              {index < row.tags.length - 1 && <span>, </span>}
+              {index < arr.length - 1 && ", "}
             </span>
           ))}
         </div>
       ),
+    },
+    {
+      key: "actions",
+      header: "Actions",
+      onEdit: (row) => console.log("Edit", row),
+      onDelete: (row) => console.log("Delete", row),
     },
   ];
 
@@ -75,6 +89,13 @@ const Profile: React.FC = () => {
         onTagChange={(val) => setSelectedTag(val)}
       />
       <Table columns={columns} data={posts} />
+      {posts.length !== 0 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      )}
     </div>
   );
 };
