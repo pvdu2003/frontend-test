@@ -25,6 +25,13 @@ h2 {
   font-size: 12px;
 }
 
+.popupActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
 @media (max-width: 768px) {
   .profile {
     padding: 16px;

@@ -2,11 +2,20 @@ import React, { useEffect, useState } from "react";
 import styles from "./Profile.module.css";
 import type { Column } from "../../shared/components/Table/Table";
 import Table from "../../shared/components/Table/Table";
-import { getAllPost, getAllTags } from "../../services/profile.service";
+import {
+  createPost,
+  deletePost,
+  getAllPost,
+  getAllTags,
+  updatePost,
+} from "../../services/profile.service";
 import Filter from "../../shared/components/Filter/Filter";
 import Pagination from "../../shared/components/Pagination/Pagination";
+import Popup from "../../shared/components/Popup/Popup";
+import PostForm from "../../shared/components/PostForm/PostForm";
+import Button from "../../shared/components/Button/Button";
 
-interface Post {
+export interface Post {
   id: string;
   title: string;
   description: string;
@@ -20,6 +29,41 @@ const Profile: React.FC = () => {
   const [title, setTitle] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [editingPost, setEditingPost] = useState<Post | null>(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [postToDelete, setPostToDelete] = useState<Post | null>(null);
+
+  const handleEdit = (post: Post) => {
+    setEditingPost(post);
+    setIsPopupOpen(true);
+  };
+
+  const handleAdd = () => {
+    setEditingPost(null);
+    setIsPopupOpen(true);
+  };
+
+  const handlePopupClose = () => {
+    setIsPopupOpen(false);
+    setEditingPost(null);
+  };
+  const handleDeleteClick = (post: Post) => {
+    setPostToDelete(post);
+    setShowDeleteConfirm(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!postToDelete) return;
+    try {
+      await deletePost(postToDelete.id);
+      setShowDeleteConfirm(false);
+      setPostToDelete(null);
+      fetchPosts();
+    } catch (err) {
+      console.error("Delete failed", err);
+    }
+  };
 
   const fetchTags = async () => {
     try {
@@ -30,23 +74,23 @@ const Profile: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await getAllPost(
-          currentPage.toString(),
-          title,
-          selectedTag
-        );
-        setPosts(response.posts);
-        setTotalPages(response.total_page);
-      } catch (err) {
-        console.error("Error fetching posts:", err);
-      }
-    };
+  const fetchPosts = React.useCallback(async () => {
+    try {
+      const response = await getAllPost(
+        currentPage.toString(),
+        title,
+        selectedTag
+      );
+      setPosts(response.posts);
+      setTotalPages(response.total_page);
+    } catch (err) {
+      console.error("Error fetching posts:", err);
+    }
+  }, [currentPage, title, selectedTag]);
 
+  useEffect(() => {
     fetchPosts();
-  }, [selectedTag, title, currentPage]);
+  }, [fetchPosts]);
 
   const columns: Column<Post>[] = [
     { key: "title", header: "Title" },
@@ -68,8 +112,8 @@ const Profile: React.FC = () => {
     {
       key: "actions",
       header: "Actions",
-      onEdit: (row) => console.log("Edit", row),
-      onDelete: (row) => console.log("Delete", row),
+      onEdit: (row) => handleEdit(row),
+      onDelete: (row) => handleDeleteClick(row),
     },
   ];
 
@@ -80,7 +124,7 @@ const Profile: React.FC = () => {
   return (
     <div className={styles.profile}>
       <h2>Post Management</h2>
-
+      <Button text="Add Post" onClick={handleAdd} />
       <Filter
         title={title}
         tag={selectedTag}
@@ -96,6 +140,45 @@ const Profile: React.FC = () => {
           onPageChange={(page) => setCurrentPage(page)}
         />
       )}
+      <Popup
+        isOpen={isPopupOpen}
+        onClose={handlePopupClose}
+        title={editingPost ? "Edit Post" : "Add Post"}
+      >
+        <PostForm
+          post={editingPost}
+          onSubmit={async (formData) => {
+            if (editingPost) {
+              await updatePost(editingPost.id, formData);
+            } else {
+              await createPost(formData);
+            }
+            handlePopupClose();
+            fetchPosts();
+          }}
+        />
+      </Popup>
+      <Popup
+        isOpen={showDeleteConfirm}
+        onClose={() => {
+          setShowDeleteConfirm(false);
+          setPostToDelete(null);
+        }}
+        title="Confirm Delete"
+      >
+        <p>Are you sure you want to delete post {postToDelete?.title}?</p>
+        <div className={styles.popupActions}>
+          <Button onClick={confirmDelete} text="Yes, Delete" />
+          <Button
+            onClick={() => {
+              setShowDeleteConfirm(false);
+              setPostToDelete(null);
+            }}
+            text="Cancel"
+            variant="secondary"
+          ></Button>
+        </div>
+      </Popup>
     </div>
   );
 };
