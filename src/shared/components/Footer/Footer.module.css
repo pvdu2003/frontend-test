@@ -1,5 +1,4 @@
 .footer {
-  background-color: #fff;
   padding: 3rem;
   font-size: 0.9rem;
   color: #2d2d2d;
@@ -16,6 +15,11 @@
 .column {
   min-width: 180px;
   flex: 1;
+}
+
+.column p {
+  margin-bottom: 0.5rem;
+  color: #555;
 }
 
 .logo {

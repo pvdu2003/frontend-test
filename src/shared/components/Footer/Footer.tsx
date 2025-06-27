@@ -44,10 +44,10 @@ const Footer: React.FC = () => (
         <h4>Social Media</h4>
         <div className={styles.socialIcons}>
           <a href="#" className={styles.socialCircle} title="Social">
-            <img src="./images/chat.png" alt="" />
+            <img src="./images/facebook.png" alt="" />
           </a>
           <a href="#" className={styles.socialCircle} title="Social">
-            <img src="./images/chat.png" alt="" />
+            <img src="./images/youtube.png" alt="" />
           </a>
           <a href="#" className={styles.socialCircle} title="Social">
             <img src="./images/chat.png" alt="" />

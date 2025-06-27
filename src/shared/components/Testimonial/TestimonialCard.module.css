@@ -1,9 +1,9 @@
 .card {
-  width: 400px;
-  height: 180px;
+  width: 420px;
+  height: 200px;
   background-color: white;
   border-radius: 1.5rem;
-  padding: 2.5rem;
+  padding: 1.5rem;
   text-align: left;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   margin: 0 auto;
@@ -38,4 +38,18 @@
 .company {
   color: #a044ff;
   font-size: 0.9rem;
+}
+
+.text {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.5;
+  max-height: calc(1.5em * 2);
 }

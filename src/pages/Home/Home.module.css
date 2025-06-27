@@ -4,6 +4,22 @@
   align-items: center;
   padding: 3rem;
 }
+.hero div h1 {
+  font-size: 3.5rem;
+  color: #121212;
+  margin-bottom: 1rem;
+}
+
+.hero div p {
+  line-height: 1.5;
+  padding: 1rem 0;
+  color: #555;
+}
+.hero img {
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+}
 
 .features {
   padding: 3rem;
@@ -40,5 +56,9 @@
 
   .features {
     padding: 2rem;
+  }
+  .testimonials {
+    /* padding: 30px; */
+    margin: 0 1.5rem;
   }
 }
