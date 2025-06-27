@@ -4,6 +4,9 @@
   align-items: center;
   padding: 3rem;
 }
+.hero div {
+  min-width: 400px;
+}
 .hero div h1 {
   font-size: 3.5rem;
   color: #121212;
@@ -16,7 +19,7 @@
   color: #555;
 }
 .hero img {
-  max-width: 500px;
+  max-width: 800px;
   width: 100%;
   height: auto;
 }
@@ -50,7 +53,6 @@
   }
 
   .hero img {
-    max-width: 100%;
     margin-top: 20px;
   }
 
@@ -58,7 +60,7 @@
     padding: 2rem;
   }
   .testimonials {
-    /* padding: 30px; */
-    margin: 0 1.5rem;
+    padding: 30px 16px;
+    margin: 0 2rem;
   }
 }

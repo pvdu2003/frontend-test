@@ -15,42 +15,64 @@ const Footer: React.FC = () => (
         </div>
         <p>Warehouse Society, 234</p>
         <p>Bahagia Ave Street PRBW 29281</p>
-        <p>info@warehouse.project</p>
-        <p>1-232-3434 (Main)</p>
+        <p>
+          <a href="mailto:info@warehouse.project">info@warehouse.project</a>
+        </p>
+        <p>
+          <a href="tel:+12323434">1-232-3434 (Main)</a>
+        </p>
       </div>
 
       <div className={styles.column}>
         <h4>About</h4>
         <ul>
-          <li>Profile</li>
-          <li>Features</li>
-          <li>Careers</li>
-          <li>DW News</li>
+          <li>
+            <a href="#">Profile</a>
+          </li>
+          <li>
+            <a href="#">Features</a>
+          </li>
+          <li>
+            <a href="#">Careers</a>
+          </li>
+          <li>
+            <a href="#">DW News</a>
+          </li>
         </ul>
       </div>
 
       <div className={styles.column}>
         <h4>Help</h4>
         <ul>
-          <li>Support</li>
-          <li>Sign up</li>
-          <li>Guide</li>
-          <li>Reports</li>
-          <li>Q&A</li>
+          <li>
+            <a href="#">Support</a>
+          </li>
+          <li>
+            <a href="#">Sign up</a>
+          </li>
+          <li>
+            <a href="#">Guide</a>
+          </li>
+          <li>
+            <a href="#">Reports</a>
+          </li>
+          <li>
+            <a href="#">Q&A</a>
+          </li>
         </ul>
       </div>
 
       <div className={styles.column}>
         <h4>Social Media</h4>
         <div className={styles.socialIcons}>
-          <a href="#" className={styles.socialCircle} title="Social">
-            <img src="./images/facebook.png" alt="" />
+          <a href="#" className={styles.socialCircle} title="Facebook">
+            <img src="./images/facebook.png" alt="Facebook" />
           </a>
-          <a href="#" className={styles.socialCircle} title="Social">
-            <img src="./images/youtube.png" alt="" />
+          <a href="#" className={styles.socialCircle} title="YouTube">
+            <img src="./images/youtube.png" alt="YouTube" />
           </a>
-          <a href="#" className={styles.socialCircle} title="Social">
-            <img src="./images/chat.png" alt="" />
+          <a href="#" className={styles.socialCircle} title="Chat">
+            <img src="./images/chat.png" alt="Chat" />
           </a>
         </div>
       </div>
