@@ -11,13 +11,21 @@ export interface Column<T> {
 interface TableProps<T extends object> {
   columns: Column<T>[];
   data: T[];
+  currentPage: number;
+  pageSize: number;
 }
 
-function Table<T extends object>({ columns, data }: TableProps<T>) {
+function Table<T extends object>({
+  columns,
+  data,
+  currentPage,
+  pageSize,
+}: TableProps<T>) {
   return (
     <table className={styles.table}>
       <thead>
         <tr>
+          <th>ID</th>
           {columns.map((col, idx) => (
             <th key={idx}>{col.header}</th>
           ))}
@@ -26,13 +34,14 @@ function Table<T extends object>({ columns, data }: TableProps<T>) {
       <tbody>
         {data.length === 0 && (
           <tr>
-            <td colSpan={columns.length} className={styles.noData}>
+            <td colSpan={columns.length + 1} className={styles.noData}>
               No data available
             </td>
           </tr>
         )}
         {data.map((row, rowIdx) => (
           <tr key={rowIdx}>
+            <td>{pageSize * (currentPage - 1) + rowIdx + 1}</td>
             {columns.map((col, colIdx) => (
               <td key={colIdx}>
                 {col.key === "actions" ? (

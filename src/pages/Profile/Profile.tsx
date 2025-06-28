@@ -29,6 +29,8 @@ const Profile: React.FC = () => {
   const [title, setTitle] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [loading, setLoading] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [editingPost, setEditingPost] = useState<Post | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -75,6 +77,7 @@ const Profile: React.FC = () => {
   };
 
   const fetchPosts = React.useCallback(async () => {
+    setLoading(true);
     try {
       const response = await getAllPost(
         currentPage.toString(),
@@ -83,8 +86,11 @@ const Profile: React.FC = () => {
       );
       setPosts(response.posts);
       setTotalPages(response.total_page);
+      setPageSize(response.page_size);
     } catch (err) {
       console.error("Error fetching posts:", err);
+    } finally {
+      setLoading(false);
     }
   }, [currentPage, title, selectedTag]);
 
@@ -100,10 +106,9 @@ const Profile: React.FC = () => {
       header: "Tags",
       render: (row) => (
         <div className={styles.tagList}>
-          {(row.tags || []).map((tag, index, arr) => (
+          {(row.tags || []).map((tag, index) => (
             <span key={index} className={styles.tag}>
               {tag}
-              {index < arr.length - 1 && ", "}
             </span>
           ))}
         </div>
@@ -132,7 +137,17 @@ const Profile: React.FC = () => {
         onTitleChange={(val) => setTitle(val)}
         onTagChange={(val) => setSelectedTag(val)}
       />
-      <Table columns={columns} data={posts} />
+      {loading ? (
+        <div className={styles.loading}>Loading...</div>
+      ) : (
+        <Table
+          columns={columns}
+          data={posts}
+          currentPage={currentPage}
+          pageSize={pageSize}
+        />
+      )}
+
       {posts.length !== 0 && (
         <Pagination
           currentPage={currentPage}

@@ -29,3 +29,6 @@
   color: white;
   border-color: #007bff;
 }
+.active:hover {
+  background-color: #0056b3;
+}

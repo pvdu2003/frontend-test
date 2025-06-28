@@ -15,11 +15,20 @@ const Pagination: React.FC<PaginationProps> = ({
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   const handleClick = (page: number) => {
-    if (page !== currentPage) onPageChange(page);
+    if (page !== currentPage && page >= 1 && page <= totalPages) {
+      onPageChange(page);
+    }
   };
 
   return (
     <div className={styles.pagination}>
+      <button
+        className={styles.pageButton}
+        onClick={() => handleClick(1)}
+        disabled={currentPage === 1}
+      >
+        &lt;&lt;
+      </button>
       <button
         className={styles.pageButton}
         onClick={() => handleClick(currentPage - 1)}
@@ -46,6 +55,13 @@ const Pagination: React.FC<PaginationProps> = ({
         disabled={currentPage === totalPages}
       >
         &gt;
+      </button>
+      <button
+        className={styles.pageButton}
+        onClick={() => handleClick(totalPages)}
+        disabled={currentPage === totalPages}
+      >
+        &gt;&gt;
       </button>
     </div>
   );
