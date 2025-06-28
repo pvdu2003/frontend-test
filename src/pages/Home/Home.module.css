@@ -4,9 +4,11 @@
   align-items: center;
   padding: 3rem;
 }
+
 .hero div {
   min-width: 400px;
 }
+
 .hero div h1 {
   font-size: 3.5rem;
   color: #121212;
@@ -18,6 +20,7 @@
   padding: 1rem 0;
   color: #555;
 }
+
 .hero img {
   max-width: 800px;
   width: 100%;
@@ -25,23 +28,25 @@
 }
 
 .features {
-  padding: 3rem;
+  padding: 3rem 0;
   text-align: center;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 2rem;
   margin-top: 2rem;
 }
+
 .testimonials {
   padding: 30px 40px;
   margin: 0 3rem;
   background-color: #f5f5ff;
   border-radius: 20px;
 }
-@media (max-width: 1024px) {
+
+@media (max-width: 1280px) {
   .hero {
     flex-direction: column;
     text-align: center;
@@ -59,8 +64,17 @@
   .features {
     padding: 2rem;
   }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
   .testimonials {
     padding: 30px 16px;
     margin: 0 2rem;
+  }
+
+  .hero div h1 {
+    font-size: 2.25rem;
   }
 }

@@ -7,22 +7,30 @@ function Home() {
   const features = [
     {
       title: "Search Data",
-      description: "Easily search your stored data anytime.",
+      description:
+        "Don’t worry if your data is very large, the Data Warehouse provides a search engine, which is useful for making it easier to find data effectively saving time.",
       icon: "./images/feature1.png",
+      backgroundImage: "./images/feature-bg1.png",
     },
     {
       title: "24 Hours Access",
-      description: "Your data is available 24/7 with strong protection.",
+      description:
+        "Access is given 24 hours a full morning to night and meet again in the morning, giving you comfort when you need data when urgent.",
+      backgroundImage: "./images/feature-bg2.png",
       icon: "./images/feature2.png",
     },
     {
       title: "Print Out",
-      description: "Get a printable version of your data on demand.",
+      description:
+        "Print out service gives you convenience if someday you need print data, just edit it all and just print it.",
+      backgroundImage: "./images/feature-bg3.png",
       icon: "./images/feature3.png",
     },
     {
       title: "Security Code",
-      description: "Top-tier encryption ensures your data is safe.",
+      description:
+        "Data Security is one of our best facilities. Allows for your files to be safer. The file can be secured with a code or password than you created, so only you can open the file.",
+      backgroundImage: "./images/feature-bg4.png",
       icon: "./images/feature4.png",
     },
   ];
@@ -71,13 +79,13 @@ function Home() {
         <h2>Features</h2>
         <div className={styles.grid}>
           {features.map((f, idx) => (
-            <div key={idx}>
-              <FeatureItem
-                title={f.title}
-                description={f.description}
-                icon={f.icon}
-              />
-            </div>
+            <FeatureItem
+              key={idx}
+              title={f.title}
+              description={f.description}
+              icon={f.icon}
+              backgroundImage={f.backgroundImage}
+            />
           ))}
         </div>
       </section>

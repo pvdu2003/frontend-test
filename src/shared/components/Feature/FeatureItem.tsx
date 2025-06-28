@@ -6,32 +6,39 @@ interface FeatureItemProps {
   title: string;
   description: string;
   icon: string;
+  backgroundImage: string;
 }
 
 const FeatureItem: React.FC<FeatureItemProps> = ({
   title,
   description,
   icon,
+  backgroundImage,
 }) => {
   const itemRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    const el = itemRef.current;
+    if (el && backgroundImage) {
+      el.style.setProperty("--feature-bg", `url(${backgroundImage})`);
+    }
+  }, [backgroundImage]);
+
+  useEffect(() => {
     const handleScroll = () => {
       const el = itemRef.current;
       if (!el) return;
-
       const rect = el.getBoundingClientRect();
       const inView = rect.top <= window.innerHeight - 60 && rect.bottom >= 60;
-
       setVisible(inView);
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // check on mount
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [visible]);
+  }, []);
 
   return (
     <div
@@ -41,9 +48,11 @@ const FeatureItem: React.FC<FeatureItemProps> = ({
       }`}
     >
       <img className={styles.featureImage} src={icon} alt={title} />
-      <h3 className={styles.title}>{title}</h3>
-      <p className={styles.description}>{description}</p>
-      <IconButton text="Learn More" />
+      <div className={styles.content}>
+        <h3 className={styles.title}>{title}</h3>
+        <p className={styles.description}>{description}</p>
+        <IconButton text="Learn More" />
+      </div>
     </div>
   );
 };
