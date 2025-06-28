@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./FeatureItem.module.css";
 import IconButton from "../IconButton/IconButton";
+import { useScrollVisible } from "../../../hooks/useScrollVisible";
 
 interface FeatureItemProps {
   title: string;
@@ -15,36 +16,19 @@ const FeatureItem: React.FC<FeatureItemProps> = ({
   icon,
   backgroundImage,
 }) => {
-  const itemRef = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
+  const item = useScrollVisible();
   useEffect(() => {
-    const el = itemRef.current;
+    const el = item.ref.current;
     if (el && backgroundImage) {
       el.style.setProperty("--feature-bg", `url(${backgroundImage})`);
     }
-  }, [backgroundImage]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const el = itemRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const inView = rect.top <= window.innerHeight - 60 && rect.bottom >= 60;
-      setVisible(inView);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [backgroundImage, item.ref]);
 
   return (
     <div
-      ref={itemRef}
-      className={`${styles.card} ${styles.featureItem} ${
-        visible ? styles.visible : ""
+      ref={item.ref}
+      className={`${styles.card} ${styles.featureItem} animate from-left ${
+        item.visible ? "visible" : ""
       }`}
     >
       <img className={styles.featureImage} src={icon} alt={title} />

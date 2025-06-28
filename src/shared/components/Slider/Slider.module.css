@@ -90,3 +90,9 @@
 .arrowRight {
   right: 5px;
 }
+
+@media (max-width: 768px) {
+  .sideCard {
+    display: none;
+  }
+}

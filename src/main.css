@@ -11,3 +11,29 @@ body {
   font-family: sans-serif;
   background-color: #f9f9f9;
 }
+
+.animate {
+  opacity: 0;
+  transition: all 1s ease-out;
+}
+
+.animate.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.from-top {
+  transform: translateY(-40px);
+}
+
+.from-bottom {
+  transform: translateY(40px);
+}
+
+.from-left {
+  transform: translateX(-40px);
+}
+
+.from-right {
+  transform: translateX(40px);
+}

@@ -1,9 +1,13 @@
+import { useScrollVisible } from "../../hooks/useScrollVisible";
 import Button from "../../shared/components/Button/Button";
 import FeatureItem from "../../shared/components/Feature/FeatureItem";
 import Slider from "../../shared/components/Slider/Slider";
 import TestimonialCard from "../../shared/components/Testimonial/TestimonialCard";
 import styles from "./Home.module.css";
 function Home() {
+  const hero = useScrollVisible();
+  const featuresSection = useScrollVisible();
+  const testimonialsSection = useScrollVisible();
   const features = [
     {
       title: "Search Data",
@@ -63,7 +67,12 @@ function Home() {
   ];
   return (
     <>
-      <section className={styles.hero}>
+      <section
+        ref={hero.ref}
+        className={`${styles.hero} animate from-left ${
+          hero.visible ? "visible" : ""
+        }`}
+      >
         <div>
           <h1>Save your data storage here.</h1>
           <p>
@@ -76,7 +85,14 @@ function Home() {
         <img src="./images/hero.png" alt="Illustration" />
       </section>
       <section className={styles.features}>
-        <h2>Features</h2>
+        <h2
+          ref={featuresSection.ref}
+          className={`animate from-right ${
+            featuresSection.visible ? "visible" : ""
+          }`}
+        >
+          Features
+        </h2>
         <div className={styles.grid}>
           {features.map((f, idx) => (
             <FeatureItem
@@ -89,7 +105,12 @@ function Home() {
           ))}
         </div>
       </section>
-      <section className={styles.testimonials}>
+      <section
+        ref={testimonialsSection.ref}
+        className={`${styles.testimonials} animate from-top ${
+          testimonialsSection.visible ? "visible" : ""
+        }`}
+      >
         <h2>Testimonials</h2>
         <Slider>
           {testimonials.map((t, idx) => (
