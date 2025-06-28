@@ -1,16 +1,15 @@
 .hero {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 3rem;
 }
 
 .hero div {
-  min-width: 400px;
+  flex: 1;
 }
 
 .hero div h1 {
-  font-size: 3.5rem;
+  font-size: 4rem;
   color: #121212;
   margin-bottom: 1rem;
 }
@@ -22,7 +21,7 @@
 }
 
 .hero img {
-  max-width: 800px;
+  flex: 2;
   width: 100%;
   height: auto;
 }
