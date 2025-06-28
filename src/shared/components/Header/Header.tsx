@@ -13,8 +13,8 @@ const Header: React.FC = () => {
   const navigateToProfile = () => {
     navigate("/profile");
   };
-  const handleLogout = async () => {
-    await logout();
+  const handleLogout = () => {
+    logout();
   };
   return (
     <header className={styles.header}>
