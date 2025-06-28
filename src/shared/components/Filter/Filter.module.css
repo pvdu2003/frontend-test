@@ -1,9 +1,26 @@
 .filters {
   display: flex;
+  flex-wrap: nowrap;
   gap: 12px;
   margin: 1rem 0;
+  width: 100%;
+  max-width: 600px;
 }
 input,
 select {
   padding: 6px 12px;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .filters {
+    flex-wrap: wrap;
+  }
+
+  input,
+  select {
+    flex: 1 1 100%;
+  }
 }

@@ -129,14 +129,16 @@ const Profile: React.FC = () => {
   return (
     <div className={styles.profile}>
       <h2>Post Management</h2>
-      <Button text="Add Post" onClick={handleAdd} />
-      <Filter
-        title={title}
-        tag={selectedTag}
-        tags={tags}
-        onTitleChange={(val) => setTitle(val)}
-        onTagChange={(val) => setSelectedTag(val)}
-      />
+      <div className={styles.actions}>
+        <Button text="Add Post" onClick={handleAdd} />
+        <Filter
+          title={title}
+          tag={selectedTag}
+          tags={tags}
+          onTitleChange={(val) => setTitle(val)}
+          onTagChange={(val) => setSelectedTag(val)}
+        />
+      </div>
       {loading ? (
         <div className={styles.loading}>Loading...</div>
       ) : (
@@ -171,6 +173,7 @@ const Profile: React.FC = () => {
             handlePopupClose();
             fetchPosts();
           }}
+          allTags={tags}
         />
       </Popup>
       <Popup
